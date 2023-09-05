@@ -1,4 +1,4 @@
-# move_training
+# Move training
 Move training material
 
 ## Session 1 ([Zoom Recording](https://mystenlabs.zoom.us/rec/share/tRwFdohU5itg8IdFGHfMYWptYBGhQUxGPPGCpf3_aHI15I_nCax_lLfuBmbbK9zG.nLNYOgZr26l4CgsY?startTime=1693901215000))
