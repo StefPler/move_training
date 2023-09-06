@@ -10,8 +10,40 @@ Move training material
   - `sui client call --package $packageId --module potions --function drink_potion --args $potionId --gas-budget 10000000`
   - Fund your account via the Sui Discord faucet channels (or ask me for some funds :D)
 
-## Useful cli commands
+## Session 2 ([Zoom Recording](https://mystenlabs.zoom.us/rec/share/-Y9nkERCvHuNXoRb9gKAPcc5dCyr1DLpTtvrTSqZCXFBPppTZRaNQrhaiX3f3KwC.wuI45q66z5CUJEOP?startTime=1693988277000))
+- Discussed in more detail and wrote simple code examples for struct abilities and function syntax.
+- Had a look at library code with a focus in the Option module and how its used instead of null.
+- Typescript sui SDK example 
+  - Set up the environment
+  - Programmable transaction block
+  - Smart contract design descisions based on PTB features
+      - Re-deployed the latest version of the smart contract & set up a .env file with the new packageId and user mnemonic
+
+## Instructions to set up your vs-code / typescript environment
+1. Install the node version manager. For mac you can run `brew install nvm`.
+1. Use nvm to install a stable node version, e.g: `nvm install 18.15.0`.
+1. Install the typescript compiler globally by running `npm install -g typescript`.
+1. Install npm dependencies used in this project by running `npm install @mysten/sui.js dotenv`. If you use the existing scripts folder you only need to run `npm install` which will install all dependencies declared in the `package.json` file.
+1. To initialize a typescript project run `tsc --init` inside a new folder.
+1. Comment out the outDir variable from the `tsconfig.json` file and type "dist" as the value.
+1. Create a script called "start" in the `package.json` with a value of `tsc && node dist/index.js`.
+1. Run `npm run start` to compile and exeucte the script.
+1. You can also skip steps 5-8 and use `ts-node programmable_transaction.ts` to run the script directly without getting the transpiled artifacts. This requires to install ts-node globally first by running `npm install -g ts-node`
+
+# Useful environment & tooling information
+## VS Code extentions
+- GitHub Copilot - for code suggestions
+- Git Graph - for a visual representation of the git history
+- Move syntax & Move analyzer plugin - for syntax highlighting and error checking
+- Prettier - for code formatting
+- Tailwind CSS IntelliSense - for tailwind css autocomplete and css snippets (useful for react projects that use tailwind)
+
+## Sui cli commands
 - Check active account funds `sui client gas`
 - Check active account address `sui client active-address`
 - Create a new account `sui keytool generate ed25519`
 - Import an existing wallet from a mnemonic `sui keytool import <mnemonic> <key_scheme>`
+- Check the curent env `sui client active-env`
+- Check all available envs along with their urls `sui client envs`
+- To switch to another account or env `sui client switch --address <address>` and `sui client switch --env <environment>` respectively.
+- To set a new environment `sui client new-env --alias <name_of_network> --rpc <url_of_FN>`
