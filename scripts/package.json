@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@mysten/sui.js": "^0.41.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9"
+  },
+  "scripts": {
+    "start": "tsc && node dist/programmable_transaction.js"
+  }
+}
