@@ -19,13 +19,21 @@ Move training material
   - Smart contract design descisions based on PTB features
       - Re-deployed the latest version of the smart contract & set up a .env file with the new packageId and user mnemonic
 
+## Session 3 ([Zoom Recording](https://mystenlabs.zoom.us/rec/share/J_Fockhq6qAv_bBdf3c4UsbI8aK7r6UidhuU0RGV-0gTY4cjK4OpxfmDeCKrvoYt.5hvxjsC5mzW7KHNM))
+- Modified the potions module to study new code patterns:
+  - Hot potato.
+  - init method.
+  - Coin & Balance library modules.
+  - Dynamic Object Fields with the introduction of a new potion_store module.
+- Tested new concepts and code by calling the contract from the Sui SDK and viewed the results in the explorer.
+
 ## Instructions to set up your vs-code / typescript environment
 1. Install the node version manager. For mac you can run `brew install nvm`.
 1. Use nvm to install a stable node version, e.g: `nvm install 18.15.0`.
 1. Install the typescript compiler globally by running `npm install -g typescript`.
 1. Install npm dependencies used in this project by running `npm install @mysten/sui.js dotenv`. If you use the existing scripts folder you only need to run `npm install` which will install all dependencies declared in the `package.json` file.
 1. To initialize a typescript project run `tsc --init` inside a new folder.
-1. Comment out the outDir variable from the `tsconfig.json` file and type "dist" as the value.
+1. Uncomment the outDir variable from the `tsconfig.json` file and type "dist" as the value.
 1. Create a script called "start" in the `package.json` with a value of `tsc && node dist/index.js`.
 1. Run `npm run start` to compile and exeucte the script.
 1. You can also skip steps 5-8 and use `ts-node programmable_transaction.ts` to run the script directly without getting the transpiled artifacts. This requires to install ts-node globally first by running `npm install -g ts-node`
