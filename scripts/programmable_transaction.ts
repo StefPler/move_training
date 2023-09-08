@@ -86,7 +86,7 @@ async function mintPotionAndList() {
 
   const potion = tx.moveCall({
     target: `${process.env.PACKAGE_ID}::potions::mint_potion`,
-    arguments: [tx.object(process.env.ADMIN_CAP as string), tx.pure("Liquid Luck"), tx.pure(100)],
+    arguments: [tx.object(process.env.ADMIN_CAP as string), tx.pure("Another Potion"), tx.pure(50)],
   });
 
   tx.moveCall({
@@ -106,4 +106,28 @@ async function mintPotionAndList() {
   console.log("Result", result.effects);
 }
 
-mintPotionAndList();
+// mintPotionAndList();
+
+async function buyListing(listing: string) {
+  const tx = new TransactionBlock();
+
+  let payment = tx.splitCoins(tx.gas, [tx.pure(1000000000)]);
+
+  tx.moveCall({
+    target: `${process.env.PACKAGE_ID}::potion_store::buy_listing`,
+    arguments: [tx.object(process.env.POTION_STORE as string), payment, tx.pure(listing) ]
+  });
+
+  let result = await client.signAndExecuteTransactionBlock({
+    transactionBlock: tx,
+    signer: keypair,
+    options: {
+      showEffects: true
+    }
+  });
+
+  console.log('Status', result.effects?.status);
+  console.log('Result', result);
+}
+
+buyListing("0xdc129d41bdd1ff5fbefd29d3c7c9ad58df253caf16eaa8e7943b8297b1e8af6f");

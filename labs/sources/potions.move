@@ -6,10 +6,12 @@ module labs::potions {
     use sui::object::{Self, UID};
     use sui::tx_context::{Self, TxContext};
     use sui::transfer;
+    use sui::package::{Self, Publisher};
 
     // Consts or Error codes
     const POTION_MASTER: address = @0xb862ab02807a85466d98bc677d84ffceb58c7864fd3b29f885d049f1f7c30c44;
     const EInvalidAmount: u64 = 1;
+    const ECallerNotPublisher: u64 = 2;
 
     struct Label has store, drop {
         value: String
@@ -36,9 +38,10 @@ module labs::potions {
         label: Option<Label>
     }
 
+    struct POTIONS has drop {}
     // Functions
 
-    fun init(ctx: &mut TxContext) {
+    fun init(otw: POTIONS, ctx: &mut TxContext) {
         let herb = Herbs {
             id: object::new(ctx),
             amount: 1
@@ -46,6 +49,17 @@ module labs::potions {
         transfer::public_transfer(herb, tx_context::sender(ctx));
         let admin_cap = AdminCap { id: object::new(ctx) };
         transfer::public_transfer(admin_cap, tx_context::sender(ctx));
+        package::claim_and_keep(otw, ctx);
+    }
+
+    // Only publisher can call this function
+    public fun make_address_admin(publisher: &Publisher, new_admin: address, ctx: &mut TxContext) {
+        let is_package_publisher = package::from_module<Potion>(publisher);
+        assert!(is_package_publisher, ECallerNotPublisher);
+        let admin_cap = AdminCap {
+            id: object::new(ctx)
+        };
+        transfer::public_transfer(admin_cap, new_admin);
     }
 
     public fun mint_potion_hot_potato(name: String, purity: u64, ctx: &mut TxContext): (Potion, MagicalInvoice) {
@@ -108,4 +122,14 @@ module labs::potions {
     public fun drink_potion(potion: Potion) {
         let _purity = internal_extract_potion(potion);
     }
+
+    public fun borrow_uid(potion: &Potion): &UID {
+        &potion.id
+    }
+
+    #[test_only]
+    public fun init_for_testing(ctx: &mut TxContext) {
+        init(POTIONS{}, ctx);
+    }
 }
+

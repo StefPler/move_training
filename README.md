@@ -27,6 +27,15 @@ Move training material
   - Dynamic Object Fields with the introduction of a new potion_store module.
 - Tested new concepts and code by calling the contract from the Sui SDK and viewed the results in the explorer.
 
+## Session 4 ([Zoom Recording](https://mystenlabs.zoom.us/rec/share/i3cDA-4CUF5tmT4S3Yn0cnsEeUc_CtfdWR7N0zG7BZPpICG4N5GaFvOJjBKeeP-t.SCNAf1iSZRHDohbB?startTime=1694160144000))
+- Corrected Dynamic Object Field Move code example & invoked it from the Sui SDK.
+- Implemented a Publisher restricted function to mint AdminCaps and send them to addresses.
+  - Had a better look into OTW pattern.
+- Viewed how to test Move modules:
+  - Testing library, syntax & patterns.
+  - Expected success tests.
+  - Expected failure tests.
+  
 ## Instructions to set up your vs-code / typescript environment
 1. Install the node version manager. For mac you can run `brew install nvm`.
 1. Use nvm to install a stable node version, e.g: `nvm install 18.15.0`.
